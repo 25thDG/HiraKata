@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../core/theme/app_theme.dart';
+import 'dart:math';
+
+import '../features/kana_game/application/kana_game_controller.dart';
+import '../features/kana_game/data/kana_repository.dart';
 import '../features/kana_game/ui/kana_guess_page.dart';
+import '../features/kana_game/ui/kana_select_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -11,7 +16,24 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.light(),
-      home: const KanaGuessPage(),
+      home: Builder(
+        builder: (context) {
+          return KanaSelectPage(
+            onStart: (pool) {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (context) => KanaGuessPage(
+                    controller: KanaGameController(
+                      repository: KanaRepository(characters: pool),
+                      random: Random(),
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
