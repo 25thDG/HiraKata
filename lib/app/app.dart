@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/theme/app_theme.dart';
-import '../features/counter/presentation/pages/counter_page.dart';
+import '../features/kana_game/ui/kana_guess_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -11,7 +11,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.light(),
-      home: const CounterPage(title: 'Flutter Demo Home Page'),
+      home: const KanaGuessPage(),
     );
   }
 }
