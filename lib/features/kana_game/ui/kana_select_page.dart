@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../application/kana_row_selection_controller.dart';
 import '../data/kana_row_dataset.dart';
@@ -27,32 +27,41 @@ class KanaSelectPage extends StatefulWidget {
 class _KanaSelectPageState extends State<KanaSelectPage> {
   late final KanaRowSelectionController _controller;
   late final List<KanaRow> _rows;
+  late final Map<String, KanaRow> _rowById;
 
   @override
   void initState() {
     super.initState();
     _rows = List<KanaRow>.unmodifiable(widget.rows ?? KanaRowDataset.all());
+    _rowById = {for (final row in _rows) row.id: row};
     _controller = widget.controller ??
         KanaRowSelectionController(
           rows: _rows,
         );
   }
 
-  void _toggleHiragana() {
+  void _setScriptMode(KanaScriptMode mode) {
     setState(() {
-      _controller.setHiraganaEnabled(!_controller.state.hiraganaEnabled);
-    });
-  }
-
-  void _toggleKatakana() {
-    setState(() {
-      _controller.setKatakanaEnabled(!_controller.state.katakanaEnabled);
+      switch (mode) {
+        case KanaScriptMode.hiragana:
+          _controller.setScripts(hiraganaEnabled: true, katakanaEnabled: false);
+        case KanaScriptMode.katakana:
+          _controller.setScripts(hiraganaEnabled: false, katakanaEnabled: true);
+        case KanaScriptMode.both:
+          _controller.setScripts(hiraganaEnabled: true, katakanaEnabled: true);
+      }
     });
   }
 
   void _toggleRow(KanaRow row) {
     setState(() {
       _controller.toggleRow(row.id);
+    });
+  }
+
+  void _selectAllRows() {
+    setState(() {
+      _controller.setSelectedRows(_rows.map((row) => row.id));
     });
   }
 
@@ -65,7 +74,7 @@ class _KanaSelectPageState extends State<KanaSelectPage> {
     }
 
     Navigator.of(context).push(
-      MaterialPageRoute<void>(
+      CupertinoPageRoute<void>(
         builder: (context) => const KanaGuessPage(),
       ),
     );
@@ -84,165 +93,244 @@ class _KanaSelectPageState extends State<KanaSelectPage> {
       ],
     );
     final state = _controller.state;
-    final showHiragana = state.hiraganaEnabled || !state.katakanaEnabled;
     final selectedRowIds = state.selectedRowIds;
+    final allSelected =
+        selectedRowIds.length == _rows.length && _rows.isNotEmpty;
+    final mode = _scriptModeFromState(state.hiraganaEnabled, state.katakanaEnabled);
+    final showHiragana = mode != KanaScriptMode.katakana;
+    final canStart = _controller.isSelectionValid;
 
-    return Theme(
-      data: Theme.of(context).copyWith(
-        useMaterial3: true,
-        scaffoldBackgroundColor: palette.background,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: palette.accent,
-          brightness: Brightness.light,
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: palette.background,
-        body: SafeArea(
-          child: CustomScrollView(
+    return CupertinoPageScaffold(
+      backgroundColor: palette.background,
+      child: Stack(
+        children: [
+          CustomScrollView(
             slivers: [
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(28, 24, 28, 12),
-                sliver: SliverToBoxAdapter(
+              CupertinoSliverNavigationBar(
+                largeTitle: const Text('Kana'),
+                trailing: CupertinoButton(
+                  padding: EdgeInsets.zero,
+                  minSize: 0,
+                  pressedOpacity: 0.6,
+                  onPressed: allSelected ? null : _selectAllRows,
+                  child: Text(
+                    'Check All',
+                    style: baseTextStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: allSelected
+                          ? palette.textSecondary
+                          : palette.accent,
+                    ),
+                  ),
+                ),
+                backgroundColor: palette.background,
+                border: null,
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 4, 20, 12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Choose Kana',
+                        'Choose the rows you want to practice.',
                         style: baseTextStyle.copyWith(
-                          fontSize: 30,
-                          letterSpacing: 0.4,
-                          fontWeight: FontWeight.w600,
-                          color: palette.textPrimary,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Select rows to practice',
-                        style: baseTextStyle.copyWith(
-                          fontSize: 16,
-                          letterSpacing: 0.6,
+                          fontSize: 14,
+                          letterSpacing: 0.2,
                           color: palette.textSecondary,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       KanaScriptToggle(
-                        hiraganaEnabled: state.hiraganaEnabled,
-                        katakanaEnabled: state.katakanaEnabled,
-                        onHiraganaTap: _toggleHiragana,
-                        onKatakanaTap: _toggleKatakana,
-                        accentColor: palette.accent,
-                        surfaceColor: palette.surface,
-                        textColor: palette.textPrimary,
-                        mutedTextColor: palette.textSecondary,
+                        mode: mode,
+                        onChanged: _setScriptMode,
                         fontFamily: baseTextStyle.fontFamily,
                         fontFamilyFallback: baseTextStyle.fontFamilyFallback,
                       ),
+                      if (mode == KanaScriptMode.both)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            'Includes Hiragana and Katakana.',
+                            style: baseTextStyle.copyWith(
+                              fontSize: 12,
+                              letterSpacing: 0.2,
+                              color: palette.textSecondary,
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
               ),
               SliverPadding(
-                padding: const EdgeInsets.fromLTRB(24, 8, 24, 120),
-                sliver: SliverGrid(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final row = _rows[index];
-                      final selected = selectedRowIds.contains(row.id);
-                      final characters =
-                          showHiragana ? row.hiragana : row.katakana;
-                      final romajiLabels = row.hiragana
-                          .map((character) => character.romaji)
-                          .toList(growable: false);
-
-                      return KanaRowTile(
-                        rowName: row.displayName,
-                        kanaSymbols:
-                            characters.map((character) => character.symbol),
-                        romajiLabels: romajiLabels,
-                        selected: selected,
-                        onTap: () => _toggleRow(row),
-                        accentColor: palette.accent,
-                        surfaceColor: palette.surface,
-                        textColor: palette.textPrimary,
-                        mutedTextColor: palette.textSecondary,
-                        fontFamily: baseTextStyle.fontFamily,
-                        fontFamilyFallback: baseTextStyle.fontFamilyFallback,
-                      );
-                    },
-                    childCount: _rows.length,
-                  ),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 18,
-                    crossAxisSpacing: 18,
-                    childAspectRatio: 1.02,
+                padding: const EdgeInsets.fromLTRB(14, 0, 14, 140),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate(
+                    _buildSections(
+                      selectedRowIds: selectedRowIds,
+                      showHiragana: showHiragana,
+                      palette: palette,
+                      baseTextStyle: baseTextStyle,
+                    ),
                   ),
                 ),
               ),
             ],
           ),
-        ),
-        bottomNavigationBar: SafeArea(
-          minimum: const EdgeInsets.fromLTRB(24, 12, 24, 20),
-          child: SizedBox(
-            width: double.infinity,
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeOut,
-              opacity: _controller.isSelectionValid ? 1.0 : 0.55,
-              child: FilledButton(
-                onPressed: _controller.isSelectionValid ? _start : null,
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: SafeArea(
+              minimum: const EdgeInsets.fromLTRB(20, 8, 20, 16),
+              child: IgnorePointer(
+                ignoring: !canStart,
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeOut,
+                  opacity: canStart ? 1.0 : 0.4,
+                  child: CupertinoButton(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    borderRadius: BorderRadius.circular(14),
+                    color: palette.accent,
+                    pressedOpacity: 0.85,
+                    onPressed: _start,
+                    child: Text(
+                      'Start Practice',
+                      style: baseTextStyle.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.4,
+                        color: palette.buttonText,
+                      ),
                     ),
-                  ),
-                  backgroundColor: MaterialStateProperty.resolveWith(
-                    (states) {
-                      if (states.contains(MaterialState.disabled)) {
-                        return palette.surface;
-                      }
-                      return palette.accent;
-                    },
-                  ),
-                  foregroundColor: MaterialStateProperty.resolveWith(
-                    (states) {
-                      if (states.contains(MaterialState.disabled)) {
-                        return palette.textSecondary;
-                      }
-                      return palette.buttonText;
-                    },
-                  ),
-                  elevation: MaterialStateProperty.resolveWith(
-                    (states) => states.contains(MaterialState.disabled) ? 0 : 2,
-                  ),
-                ),
-                child: Text(
-                  'Start Practice',
-                  style: baseTextStyle.copyWith(
-                    fontSize: 16,
-                    letterSpacing: 0.8,
-                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
+
+  List<Widget> _buildSections({
+    required Set<String> selectedRowIds,
+    required bool showHiragana,
+    required _KanaSelectPalette palette,
+    required TextStyle baseTextStyle,
+  }) {
+    final widgets = <Widget>[];
+
+    for (final group in _rowGroups) {
+      final rows = group.rowIds
+          .map((id) => _rowById[id])
+          .whereType<KanaRow>()
+          .toList(growable: false);
+      if (rows.isEmpty) continue;
+
+      widgets.add(
+        Padding(
+          padding: const EdgeInsets.fromLTRB(6, 6, 6, 8),
+          child: Text(
+            group.title,
+            style: baseTextStyle.copyWith(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.9,
+              color: palette.textSecondary,
+            ),
+          ),
+        ),
+      );
+
+      for (final row in rows) {
+        widgets.add(
+          KanaRowTile(
+            rowLabel: _rowLabel(row.displayName),
+            characters: showHiragana ? row.hiragana : row.katakana,
+            selected: selectedRowIds.contains(row.id),
+            onTap: () => _toggleRow(row),
+            accentColor: palette.accent,
+            textColor: palette.textPrimary,
+            mutedTextColor: palette.textSecondary,
+            fontFamily: baseTextStyle.fontFamily,
+            fontFamilyFallback: baseTextStyle.fontFamilyFallback,
+          ),
+        );
+        widgets.add(const SizedBox(height: 8));
+      }
+    }
+
+    return widgets;
+  }
+
+  KanaScriptMode _scriptModeFromState(bool hiraganaEnabled, bool katakanaEnabled) {
+    if (hiraganaEnabled && katakanaEnabled) return KanaScriptMode.both;
+    if (hiraganaEnabled) return KanaScriptMode.hiragana;
+    return KanaScriptMode.katakana;
+  }
+
+  String _rowLabel(String displayName) {
+    return displayName.replaceAll(' Row', '').trim();
+  }
+
+  List<_RowGroup> get _rowGroups => const [
+        _RowGroup(
+          title: 'Basics',
+          rowIds: [
+            'a',
+            'ka',
+            'sa',
+            'ta',
+            'na',
+            'ha',
+            'ma',
+            'ya',
+            'ra',
+            'wa',
+            'n',
+          ],
+        ),
+        _RowGroup(
+          title: 'Dakuten',
+          rowIds: ['ga', 'za', 'da', 'ba'],
+        ),
+        _RowGroup(
+          title: 'Handakuten',
+          rowIds: ['pa'],
+        ),
+        _RowGroup(
+          title: 'Yoon',
+          rowIds: [
+            'kya',
+            'gya',
+            'sha',
+            'ja',
+            'cha',
+            'nya',
+            'hya',
+            'bya',
+            'pya',
+            'mya',
+            'rya',
+          ],
+        ),
+      ];
+}
+
+class _RowGroup {
+  const _RowGroup({required this.title, required this.rowIds});
+
+  final String title;
+  final List<String> rowIds;
 }
 
 class _KanaSelectPalette {
   const _KanaSelectPalette({
     required this.background,
-    required this.surface,
     required this.textPrimary,
     required this.textSecondary,
     required this.accent,
@@ -250,7 +338,6 @@ class _KanaSelectPalette {
   });
 
   final Color background;
-  final Color surface;
   final Color textPrimary;
   final Color textSecondary;
   final Color accent;
@@ -258,12 +345,11 @@ class _KanaSelectPalette {
 
   factory _KanaSelectPalette.light() {
     return const _KanaSelectPalette(
-      background: Color(0xFFF7F4EF),
-      surface: Color(0xFFF0ECE4),
-      textPrimary: Color(0xFF1B1A16),
-      textSecondary: Color(0xFF706A60),
-      accent: Color(0xFF4FA98A),
-      buttonText: Color(0xFF0F1B16),
+      background: CupertinoColors.systemGroupedBackground,
+      textPrimary: CupertinoColors.label,
+      textSecondary: CupertinoColors.secondaryLabel,
+      accent: CupertinoColors.activeBlue,
+      buttonText: CupertinoColors.white,
     );
   }
 }

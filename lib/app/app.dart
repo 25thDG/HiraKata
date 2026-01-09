@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-
-import '../core/theme/app_theme.dart';
 import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
 
 import '../features/kana_game/application/kana_game_controller.dart';
 import '../features/kana_game/data/kana_repository.dart';
@@ -13,15 +12,18 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: AppTheme.light(),
+    return CupertinoApp(
+      title: 'Hirakata',
+      theme: const CupertinoThemeData(
+        brightness: Brightness.light,
+        primaryColor: CupertinoColors.activeBlue,
+      ),
       home: Builder(
         builder: (context) {
           return KanaSelectPage(
             onStart: (pool) {
               Navigator.of(context).push(
-                MaterialPageRoute<void>(
+                CupertinoPageRoute<void>(
                   builder: (context) => KanaGuessPage(
                     controller: KanaGameController(
                       repository: KanaRepository(characters: pool),

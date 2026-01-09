@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class KanaGuessInput extends StatelessWidget {
@@ -26,19 +26,19 @@ class KanaGuessInput extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeOut,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
       decoration: BoxDecoration(
-        color: backgroundColor.withOpacity(0.65),
-        borderRadius: BorderRadius.circular(999),
+        color: backgroundColor.withOpacity(0.6),
+        borderRadius: BorderRadius.circular(18),
         boxShadow: [
           BoxShadow(
-            color: accentColor.withOpacity(0.18),
-            blurRadius: 20,
+            color: accentColor.withOpacity(0.16),
+            blurRadius: 18,
             offset: const Offset(0, 8),
           ),
         ],
       ),
-      child: TextField(
+      child: CupertinoTextField(
         controller: controller,
         focusNode: focusNode,
         autofocus: true,
@@ -52,20 +52,19 @@ class KanaGuessInput extends StatelessWidget {
         style: TextStyle(
           color: textColor,
           fontSize: 20,
-          letterSpacing: 1.2,
+          letterSpacing: 1.1,
           fontWeight: FontWeight.w500,
         ),
         cursorColor: accentColor,
         inputFormatters: const [LowercaseTextFormatter()],
-        decoration: InputDecoration(
-          hintText: 'romaji',
-          hintStyle: TextStyle(
-            color: hintColor,
-            fontSize: 18,
-            letterSpacing: 1.0,
-          ),
-          border: InputBorder.none,
+        placeholder: 'romaji',
+        placeholderStyle: TextStyle(
+          color: hintColor,
+          fontSize: 18,
+          letterSpacing: 0.8,
         ),
+        decoration: const BoxDecoration(),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
         onSubmitted: onSubmit,
       ),
     );

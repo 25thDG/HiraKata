@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../application/kana_game_controller.dart';
 import '../data/kana_repository.dart';
@@ -11,7 +11,7 @@ import 'kana_guess_stats.dart';
 
 class KanaGuessPage extends StatefulWidget {
   const KanaGuessPage({super.key, KanaGameController? controller})
-      : _controller = controller;
+    : _controller = controller;
 
   final KanaGameController? _controller;
 
@@ -40,11 +40,9 @@ class _KanaGuessPageState extends State<KanaGuessPage> {
   void initState() {
     super.initState();
     _ownsController = widget._controller == null;
-    _controller = widget._controller ??
-        KanaGameController(
-          repository: KanaRepository(),
-          random: Random(),
-        );
+    _controller =
+        widget._controller ??
+        KanaGameController(repository: KanaRepository(), random: Random());
     _textController = TextEditingController();
     _focusNode = FocusNode();
     _removeListener = _controller.addListener((state) {
@@ -88,8 +86,9 @@ class _KanaGuessPageState extends State<KanaGuessPage> {
 
   void _triggerFeedback(bool isCorrect) {
     setState(() {
-      _feedbackStatus =
-          isCorrect ? _FeedbackStatus.correct : _FeedbackStatus.incorrect;
+      _feedbackStatus = isCorrect
+          ? _FeedbackStatus.correct
+          : _FeedbackStatus.incorrect;
       _characterScale = isCorrect ? 1.03 : 1.0;
       _characterOffset = isCorrect ? Offset.zero : const Offset(0.02, 0);
     });
@@ -119,7 +118,12 @@ class _KanaGuessPageState extends State<KanaGuessPage> {
   Widget build(BuildContext context) {
     final palette = _KanaGuessPalette.dark();
     final size = MediaQuery.sizeOf(context);
-    final characterSize = min(size.width * 0.45, 210.0).clamp(120.0, 220.0);
+    final viewInsets = MediaQuery.viewInsetsOf(context);
+    final availableHeight = size.height - viewInsets.bottom;
+    final characterSize = min(
+      size.width * 0.45,
+      availableHeight * 0.32,
+    ).clamp(108.0, 210.0);
 
     final accentColor = switch (_feedbackStatus) {
       _FeedbackStatus.correct => palette.correct,
@@ -127,93 +131,109 @@ class _KanaGuessPageState extends State<KanaGuessPage> {
       _FeedbackStatus.neutral => palette.accent,
     };
 
-    return Theme(
-      data: Theme.of(context).copyWith(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-      ),
-      child: Scaffold(
-        backgroundColor: palette.background,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
-            child: Column(
-              children: [
-                const SizedBox(height: 8),
-                Expanded(
-                  child: Center(
-                    child: AnimatedContainer(
-                      duration: _animDuration,
-                      curve: Curves.easeOut,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 24,
-                      ),
-                      decoration: BoxDecoration(
-                        color: palette.surface.withOpacity(0.4),
-                        borderRadius: BorderRadius.circular(32),
-                        boxShadow: [
-                          BoxShadow(
-                            color: accentColor.withOpacity(
-                              _feedbackStatus == _FeedbackStatus.neutral
-                                  ? 0.1
-                                  : 0.2,
+    return CupertinoPageScaffold(
+      backgroundColor: palette.background,
+      child: SafeArea(
+        bottom: false,
+        child: AnimatedPadding(
+          duration: _animDuration,
+          curve: Curves.easeOut,
+          padding: EdgeInsets.only(bottom: viewInsets.bottom),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final horizontalPadding = 24.0;
+              final panelWidth = min(size.width - horizontalPadding * 2, 340.0);
+
+              return SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontalPadding,
+                  vertical: 20,
+                ),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 6),
+                      Center(
+                        child: SizedBox(
+                          width: panelWidth > 0 ? panelWidth : null,
+                          child: AnimatedContainer(
+                            duration: _animDuration,
+                            curve: Curves.easeOut,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 24,
                             ),
-                            blurRadius: 36,
-                            offset: const Offset(0, 18),
-                          ),
-                        ],
-                      ),
-                      child: AnimatedSlide(
-                        duration: _animDuration,
-                        curve: Curves.easeOut,
-                        offset: _characterOffset,
-                        child: AnimatedScale(
-                          duration: _animDuration,
-                          curve: Curves.easeOut,
-                          scale: _characterScale,
-                          child: KanaCharacterDisplay(
-                            symbol: _state.currentCharacter.symbol,
-                            fontSize: characterSize,
-                            textColor: palette.textPrimary,
-                            glowColor: accentColor,
+                            decoration: BoxDecoration(
+                              color: palette.surface.withOpacity(0.35),
+                              borderRadius: BorderRadius.circular(32),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: accentColor.withOpacity(
+                                    _feedbackStatus == _FeedbackStatus.neutral
+                                        ? 0.1
+                                        : 0.2,
+                                  ),
+                                  blurRadius: 36,
+                                  offset: const Offset(0, 18),
+                                ),
+                              ],
+                            ),
+                            child: AnimatedSlide(
+                              duration: _animDuration,
+                              curve: Curves.easeOut,
+                              offset: _characterOffset,
+                              child: AnimatedScale(
+                                duration: _animDuration,
+                                curve: Curves.easeOut,
+                                scale: _characterScale,
+                                child: KanaCharacterDisplay(
+                                  symbol: _state.currentCharacter.symbol,
+                                  fontSize: characterSize,
+                                  textColor: palette.textPrimary,
+                                  glowColor: accentColor,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                      const SizedBox(height: 12),
+                      Text(
+                        'Type the romaji',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: palette.textSecondary,
+                          fontSize: 14,
+                          letterSpacing: 1.0,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      KanaGuessInput(
+                        controller: _textController,
+                        focusNode: _focusNode,
+                        onSubmit: (value) => _submitGuess(value),
+                        accentColor: accentColor,
+                        backgroundColor: palette.surface,
+                        textColor: palette.textPrimary,
+                        hintColor: palette.textMuted,
+                      ),
+                      const SizedBox(height: 20),
+                      KanaGuessStats(
+                        correct: _state.correctCount,
+                        incorrect: _state.incorrectCount,
+                        total: _state.totalGuesses,
+                        textColor: palette.textSecondary,
+                        valueColor: palette.textPrimary,
+                      ),
+                      const SizedBox(height: 12),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 12),
-                Text(
-                  'Type the romaji',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: palette.textSecondary,
-                    fontSize: 14,
-                    letterSpacing: 1.1,
-                  ),
-                ),
-                const SizedBox(height: 14),
-                KanaGuessInput(
-                  controller: _textController,
-                  focusNode: _focusNode,
-                  onSubmit: (value) => _submitGuess(value),
-                  accentColor: accentColor,
-                  backgroundColor: palette.surface,
-                  textColor: palette.textPrimary,
-                  hintColor: palette.textMuted,
-                ),
-                const SizedBox(height: 24),
-                KanaGuessStats(
-                  correct: _state.correctCount,
-                  incorrect: _state.incorrectCount,
-                  total: _state.totalGuesses,
-                  textColor: palette.textSecondary,
-                  valueColor: palette.textPrimary,
-                ),
-                const SizedBox(height: 12),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),

@@ -645,6 +645,830 @@ class KanaRowDataset {
         ),
       ],
     ),
+    KanaRow(
+      id: 'ga',
+      displayName: 'Ga Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'が',
+          romaji: 'ga',
+          audioKey: 'hira_ga',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぎ',
+          romaji: 'gi',
+          audioKey: 'hira_gi',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぐ',
+          romaji: 'gu',
+          audioKey: 'hira_gu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'げ',
+          romaji: 'ge',
+          audioKey: 'hira_ge',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ご',
+          romaji: 'go',
+          audioKey: 'hira_go',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ガ',
+          romaji: 'ga',
+          audioKey: 'kata_ga',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ギ',
+          romaji: 'gi',
+          audioKey: 'kata_gi',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'グ',
+          romaji: 'gu',
+          audioKey: 'kata_gu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ゲ',
+          romaji: 'ge',
+          audioKey: 'kata_ge',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ゴ',
+          romaji: 'go',
+          audioKey: 'kata_go',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'za',
+      displayName: 'Za Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ざ',
+          romaji: 'za',
+          audioKey: 'hira_za',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'じ',
+          romaji: 'ji',
+          audioKey: 'hira_ji',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ず',
+          romaji: 'zu',
+          audioKey: 'hira_zu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぜ',
+          romaji: 'ze',
+          audioKey: 'hira_ze',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぞ',
+          romaji: 'zo',
+          audioKey: 'hira_zo',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ザ',
+          romaji: 'za',
+          audioKey: 'kata_za',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ジ',
+          romaji: 'ji',
+          audioKey: 'kata_ji',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ズ',
+          romaji: 'zu',
+          audioKey: 'kata_zu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ゼ',
+          romaji: 'ze',
+          audioKey: 'kata_ze',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ゾ',
+          romaji: 'zo',
+          audioKey: 'kata_zo',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'da',
+      displayName: 'Da Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'だ',
+          romaji: 'da',
+          audioKey: 'hira_da',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぢ',
+          romaji: 'ji',
+          audioKey: 'hira_ji_alt',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'づ',
+          romaji: 'zu',
+          audioKey: 'hira_zu_alt',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'で',
+          romaji: 'de',
+          audioKey: 'hira_de',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ど',
+          romaji: 'do',
+          audioKey: 'hira_do',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ダ',
+          romaji: 'da',
+          audioKey: 'kata_da',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ヂ',
+          romaji: 'ji',
+          audioKey: 'kata_ji_alt',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ヅ',
+          romaji: 'zu',
+          audioKey: 'kata_zu_alt',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'デ',
+          romaji: 'de',
+          audioKey: 'kata_de',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ド',
+          romaji: 'do',
+          audioKey: 'kata_do',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'ba',
+      displayName: 'Ba Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ば',
+          romaji: 'ba',
+          audioKey: 'hira_ba',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'び',
+          romaji: 'bi',
+          audioKey: 'hira_bi',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぶ',
+          romaji: 'bu',
+          audioKey: 'hira_bu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'べ',
+          romaji: 'be',
+          audioKey: 'hira_be',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぼ',
+          romaji: 'bo',
+          audioKey: 'hira_bo',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'バ',
+          romaji: 'ba',
+          audioKey: 'kata_ba',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ビ',
+          romaji: 'bi',
+          audioKey: 'kata_bi',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ブ',
+          romaji: 'bu',
+          audioKey: 'kata_bu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ベ',
+          romaji: 'be',
+          audioKey: 'kata_be',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ボ',
+          romaji: 'bo',
+          audioKey: 'kata_bo',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'pa',
+      displayName: 'Pa Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぱ',
+          romaji: 'pa',
+          audioKey: 'hira_pa',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぴ',
+          romaji: 'pi',
+          audioKey: 'hira_pi',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぷ',
+          romaji: 'pu',
+          audioKey: 'hira_pu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぺ',
+          romaji: 'pe',
+          audioKey: 'hira_pe',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぽ',
+          romaji: 'po',
+          audioKey: 'hira_po',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'パ',
+          romaji: 'pa',
+          audioKey: 'kata_pa',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ピ',
+          romaji: 'pi',
+          audioKey: 'kata_pi',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'プ',
+          romaji: 'pu',
+          audioKey: 'kata_pu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ペ',
+          romaji: 'pe',
+          audioKey: 'kata_pe',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ポ',
+          romaji: 'po',
+          audioKey: 'kata_po',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'kya',
+      displayName: 'Kya Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'きゃ',
+          romaji: 'kya',
+          audioKey: 'hira_kya',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'きゅ',
+          romaji: 'kyu',
+          audioKey: 'hira_kyu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'きょ',
+          romaji: 'kyo',
+          audioKey: 'hira_kyo',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'キャ',
+          romaji: 'kya',
+          audioKey: 'kata_kya',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'キュ',
+          romaji: 'kyu',
+          audioKey: 'kata_kyu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'キョ',
+          romaji: 'kyo',
+          audioKey: 'kata_kyo',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'gya',
+      displayName: 'Gya Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぎゃ',
+          romaji: 'gya',
+          audioKey: 'hira_gya',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぎゅ',
+          romaji: 'gyu',
+          audioKey: 'hira_gyu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぎょ',
+          romaji: 'gyo',
+          audioKey: 'hira_gyo',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ギャ',
+          romaji: 'gya',
+          audioKey: 'kata_gya',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ギュ',
+          romaji: 'gyu',
+          audioKey: 'kata_gyu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ギョ',
+          romaji: 'gyo',
+          audioKey: 'kata_gyo',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'sha',
+      displayName: 'Sha Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'しゃ',
+          romaji: 'sha',
+          audioKey: 'hira_sha',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'しゅ',
+          romaji: 'shu',
+          audioKey: 'hira_shu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'しょ',
+          romaji: 'sho',
+          audioKey: 'hira_sho',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'シャ',
+          romaji: 'sha',
+          audioKey: 'kata_sha',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'シュ',
+          romaji: 'shu',
+          audioKey: 'kata_shu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ショ',
+          romaji: 'sho',
+          audioKey: 'kata_sho',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'ja',
+      displayName: 'Ja Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'じゃ',
+          romaji: 'ja',
+          audioKey: 'hira_ja',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'じゅ',
+          romaji: 'ju',
+          audioKey: 'hira_ju',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'じょ',
+          romaji: 'jo',
+          audioKey: 'hira_jo',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ジャ',
+          romaji: 'ja',
+          audioKey: 'kata_ja',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ジュ',
+          romaji: 'ju',
+          audioKey: 'kata_ju',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ジョ',
+          romaji: 'jo',
+          audioKey: 'kata_jo',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'cha',
+      displayName: 'Cha Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ちゃ',
+          romaji: 'cha',
+          audioKey: 'hira_cha',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ちゅ',
+          romaji: 'chu',
+          audioKey: 'hira_chu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ちょ',
+          romaji: 'cho',
+          audioKey: 'hira_cho',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'チャ',
+          romaji: 'cha',
+          audioKey: 'kata_cha',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'チュ',
+          romaji: 'chu',
+          audioKey: 'kata_chu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'チョ',
+          romaji: 'cho',
+          audioKey: 'kata_cho',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'nya',
+      displayName: 'Nya Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'にゃ',
+          romaji: 'nya',
+          audioKey: 'hira_nya',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'にゅ',
+          romaji: 'nyu',
+          audioKey: 'hira_nyu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'にょ',
+          romaji: 'nyo',
+          audioKey: 'hira_nyo',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ニャ',
+          romaji: 'nya',
+          audioKey: 'kata_nya',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ニュ',
+          romaji: 'nyu',
+          audioKey: 'kata_nyu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ニョ',
+          romaji: 'nyo',
+          audioKey: 'kata_nyo',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'hya',
+      displayName: 'Hya Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ひゃ',
+          romaji: 'hya',
+          audioKey: 'hira_hya',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ひゅ',
+          romaji: 'hyu',
+          audioKey: 'hira_hyu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ひょ',
+          romaji: 'hyo',
+          audioKey: 'hira_hyo',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ヒャ',
+          romaji: 'hya',
+          audioKey: 'kata_hya',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ヒュ',
+          romaji: 'hyu',
+          audioKey: 'kata_hyu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ヒョ',
+          romaji: 'hyo',
+          audioKey: 'kata_hyo',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'bya',
+      displayName: 'Bya Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'びゃ',
+          romaji: 'bya',
+          audioKey: 'hira_bya',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'びゅ',
+          romaji: 'byu',
+          audioKey: 'hira_byu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'びょ',
+          romaji: 'byo',
+          audioKey: 'hira_byo',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ビャ',
+          romaji: 'bya',
+          audioKey: 'kata_bya',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ビュ',
+          romaji: 'byu',
+          audioKey: 'kata_byu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ビョ',
+          romaji: 'byo',
+          audioKey: 'kata_byo',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'pya',
+      displayName: 'Pya Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぴゃ',
+          romaji: 'pya',
+          audioKey: 'hira_pya',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぴゅ',
+          romaji: 'pyu',
+          audioKey: 'hira_pyu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'ぴょ',
+          romaji: 'pyo',
+          audioKey: 'hira_pyo',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ピャ',
+          romaji: 'pya',
+          audioKey: 'kata_pya',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ピュ',
+          romaji: 'pyu',
+          audioKey: 'kata_pyu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ピョ',
+          romaji: 'pyo',
+          audioKey: 'kata_pyo',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'mya',
+      displayName: 'Mya Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'みゃ',
+          romaji: 'mya',
+          audioKey: 'hira_mya',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'みゅ',
+          romaji: 'myu',
+          audioKey: 'hira_myu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'みょ',
+          romaji: 'myo',
+          audioKey: 'hira_myo',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ミャ',
+          romaji: 'mya',
+          audioKey: 'kata_mya',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ミュ',
+          romaji: 'myu',
+          audioKey: 'kata_myu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'ミョ',
+          romaji: 'myo',
+          audioKey: 'kata_myo',
+        ),
+      ],
+    ),
+    KanaRow(
+      id: 'rya',
+      displayName: 'Rya Row',
+      hiragana: [
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'りゃ',
+          romaji: 'rya',
+          audioKey: 'hira_rya',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'りゅ',
+          romaji: 'ryu',
+          audioKey: 'hira_ryu',
+        ),
+        KanaCharacter(
+          script: KanaScript.hiragana,
+          symbol: 'りょ',
+          romaji: 'ryo',
+          audioKey: 'hira_ryo',
+        ),
+      ],
+      katakana: [
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'リャ',
+          romaji: 'rya',
+          audioKey: 'kata_rya',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'リュ',
+          romaji: 'ryu',
+          audioKey: 'kata_ryu',
+        ),
+        KanaCharacter(
+          script: KanaScript.katakana,
+          symbol: 'リョ',
+          romaji: 'ryo',
+          audioKey: 'kata_ryo',
+        ),
+      ],
+    ),
   ];
 
   static List<KanaRow> all() => List.unmodifiable(rows);
